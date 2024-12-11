@@ -1,7 +1,8 @@
 
+import axios from "axios";
 import { useState } from "react";
 
-function AddTask() {
+function AddTask(props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
@@ -10,6 +11,23 @@ function AddTask() {
     e.preventDefault();
     // ...logic for creating a new Task should be here
     // ... the ID of the Project should be part of the Task data
+
+    const newTask = {
+      title,
+      description,
+      // ?? como le añadimos el id del proyecto?
+      projectId: props.projectId
+    }
+
+    axios.post(`${import.meta.env.VITE_SERVER_URL}/tasks`, newTask)
+    .then(() => {
+      console.log("creando tarea")
+      props.getData() // refresca la data del proyecto y todas las tareas (incluyendo la nueva)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+
 
   };
   

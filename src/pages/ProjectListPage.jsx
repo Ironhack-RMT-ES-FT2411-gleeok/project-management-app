@@ -9,9 +9,9 @@ function ProjectListPage() {
 
   useEffect(() => {
 
-    axios.get("https://project-management-api-4641927fee65.herokuapp.com/projects")
+    axios.get(`${import.meta.env.VITE_SERVER_URL}/projects`)
     .then((response) => {
-      console.log(response)
+      //console.log(response)
       setProjectsArr(response.data)
     })
     .catch((error) => {
